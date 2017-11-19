@@ -7,3 +7,5 @@
 # Exclude some other strange data files within source (poor YaBB)
 attachments.txt
 flood.txt
+
+.DS_Store
