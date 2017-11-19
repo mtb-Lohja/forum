@@ -17,26 +17,29 @@ $lastdate = "1380521364";
 
 ########## Directories ##########
 
-$boardurl = "http://www.mtb-lohja.com/cgi-bin/yabb2"; # URL of your board's folder (without trailing '/')
+# $boardurl = "http://www.mtb-lohja.com/cgi-bin/yabb2"; # URL of your board's folder (without trailing '/')
+$boardurl = "/cgi-bin/yabb2";    # URL of your board's folder (without trailing '/')
 $boarddir = ".";                                  # The server path to the board's folder (usually can be left as '.')
-$boardsdir = "./Boards";                          # Directory with board data files
-$datadir = "./Messages";                          # Directory with messages
-$memberdir = "./Members";                         # Directory with member files
+$boardsdir = "/data/Boards";                          # Directory with board data files
+$datadir = "/data/Messages";                          # Directory with messages
+$memberdir = "/data/Members";                         # Directory with member files
 $sourcedir = "./Sources";                         # Directory with YaBB source files
 $admindir = "./Admin";                            # Directory with YaBB admin source files
 $vardir = "./Variables";                          # Directory with variable files
 $langdir = "./Languages";                         # Directory with Language files and folders
 $helpfile = "./Help";                             # Directory with Help files and folders
 $templatesdir = "./Templates";                    # Directory with template files and folders
-$htmldir = "/data/mtb-lohja_html/yabbfiles"; # Base Path for all public-html files and folders
-$facesdir = "/data/mtb-lohja_html/yabbfiles/avatars"; # Base Path for all avatar files
-$uploaddir = "/data/mtb-lohja_html/yabbfiles/Attachments"; # Base Path for all attachment files
+$htmldir = "/usr/local/apache2/htdocs/yabbfiles"; # Base Path for all public-html files and folders
+$facesdir = "/usr/local/apache2/htdocs/yabbfiles/avatars"; # Base Path for all avatar files
+$uploaddir = "/data/Attachments"; # Base Path for all attachment files
 
 ########## URL's ##########
 
-$yyhtml_root = "http://www.mtb-lohja.com/yabbfiles"; # Base URL for all html/css files and folders
-$facesurl = "http://www.mtb-lohja.com/yabbfiles/avatars"; # Base URL for all avatar files
-$uploadurl = "http://www.mtb-lohja.com/yabbfiles/Attachments"; # Base URL for all attachment files
+$yyhtml_root = "/yabbfiles"; # Base URL for all html/css files and folders
+$facesurl = "/yabbfiles/avatars"; # Base URL for all avatar files
+
+# TODO: This probably is not working, as Attachments are not under Yabbfiles at the moment
+$uploadurl = "/yabbfiles/Attachments"; # Base URL for all attachment files
 
 ########## Old Path Settings ################################
 ########## The following variables are deprecated! ##########
