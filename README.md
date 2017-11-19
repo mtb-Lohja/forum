@@ -3,7 +3,7 @@
 This is the legacy forum that has run for over ten years at mtb-lohja.com converted to a Docker format. This benefits
 any administrator as now running of the forum is reproducible.
 
-## Build # run
+## Build & run
 
 Copy your data folder contents to data/ (see data/README.md for details).
 
