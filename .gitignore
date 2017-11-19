@@ -1,0 +1,9 @@
+# Do not save data folders
+/data/**/
+
+# Exclude all log files
+*log.txt
+
+# Exclude some other strange data files within source (poor YaBB)
+attachments.txt
+flood.txt
