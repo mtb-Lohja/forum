@@ -31,14 +31,12 @@ $helpfile = "./Help";                             # Directory with Help files an
 $templatesdir = "./Templates";                    # Directory with template files and folders
 $htmldir = "/usr/local/apache2/htdocs/yabbfiles"; # Base Path for all public-html files and folders
 $facesdir = "/usr/local/apache2/htdocs/yabbfiles/avatars"; # Base Path for all avatar files
-$uploaddir = "/data/Attachments"; # Base Path for all attachment files
+$uploaddir = "/yabbfiles/Attachments"; # Base Path for all attachment files
 
 ########## URL's ##########
 
 $yyhtml_root = "/yabbfiles"; # Base URL for all html/css files and folders
 $facesurl = "/yabbfiles/avatars"; # Base URL for all avatar files
-
-# TODO: This probably is not working, as Attachments are not under Yabbfiles at the moment
 $uploadurl = "/yabbfiles/Attachments"; # Base URL for all attachment files
 
 ########## Old Path Settings ################################
