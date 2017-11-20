@@ -15,3 +15,6 @@ with `docker run -p 8080:80 -v $(pwd)/data:/data mtb-lohja/forum`
 Rsync all files with their permissions:
 
     rsync -e 'ssh -i [ssh-file-location]' -ra myuser@myserver:/data ./data
+
+Then copy the folders listed in /data/README.md to the folder. Upload to new hosting
+as you wish.
