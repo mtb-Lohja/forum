@@ -291,7 +291,7 @@ sub ext_has_access {
 				if ($usergroup eq $group) { return 1; }
 
 			# check if user is on a post-independent group
-			} elsif ($group =~ m~^NoPost{(\d+)}$~) {
+			} elsif ($group =~ m~^NoPost\{(\d+)}$~) {
 				$groupid = $1;
 				# check if group exists at all
 				if ($groupid ne "" && exists $NoPost{$groupid}) {
@@ -303,7 +303,7 @@ sub ext_has_access {
 				}
 
 			# check if user is in one of the post-depending groups...
-			} elsif ($group =~ m~^Post{(\d+)}$~) {
+			} elsif ($group =~ m~^Post\{(\d+)}$~) {
 				$groupid = $1;
 				foreach (sort { $b <=> $a } keys %Post) {
 					if ($postcount > $_) {
@@ -1603,7 +1603,7 @@ sub ext_admin_convert_fixgroupnames {
 	@groups = split(/\s*\,\s*/,$input);
 	for ($j = 0; $j < @groups; $j++) {
 		# if groupname is in old format
-		if ($groups[$j] ne "Administrator" && $groups[$j] ne "Global Moderator" && $groups[$j] ne "Moderator" && $groups[$j] !~ m/^(?:No)?Post{\d+}$/) {
+		if ($groups[$j] ne "Administrator" && $groups[$j] ne "Global Moderator" && $groups[$j] ne "Moderator" && $groups[$j] !~ m/^(?:No)?Post\{\d+}$/) {
 			# find best matching usergroup
 			foreach $groupid (sort { $a <=> $b } keys %NoPost) {
 				if ($groups[$j] eq (split(/\|/, (split(/\|/, $NoPost{$groupid}))[0]))[0]) {
@@ -1639,7 +1639,7 @@ sub ext_admin_convert_fixgroupnames {
 			$checkdoubles{$groups[$j]} = 1;
 		}
 		# if still not matching, get rid of it!
-		if ($groups[$j] ne "Administrator" && $groups[$j] ne "Global Moderator" && $groups[$j] ne "Moderator" && $groups[$j] !~ m/^(?:No)?Post{\d+}$/) {
+		if ($groups[$j] ne "Administrator" && $groups[$j] ne "Global Moderator" && $groups[$j] ne "Moderator" && $groups[$j] !~ m/^(?:No)?Post\{\d+}$/) {
 			#delete $groups[$j];
 			splice(@groups,$j,1);
 			$j--;
