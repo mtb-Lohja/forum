@@ -55,12 +55,21 @@ Copy all of the data folder contents to the mounted disk
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
     gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-1 \
-      --container-image=gcr.io/mtb-lohja/forum:version-here \
+      --container-image=gcr.io/mtb-lohja/forum:1.0 \
       --container-mount-host-path=host-path=/mnt/data,mount-path=/data \
       --machine-type=f1-micro \
       --metadata=startup-script='sudo mkdir /mnt/data && sudo chmod a+w /mnt/data && gcsfuse --dir-mode "777" --file-mode "777" -o allow_other mtb-lohja-forum-data /mnt/data' \
-      --address=??? \
+      --address=35.205.128.77 \
       --region=europe-west1 \
       --scopes=default,storage-full
 
 For Fuse mounting init script see [this example.](https://lemag.sfeir.com/wordpress-cluster-docker-google-cloud-platform/)
+
+After the instance template has been created, create an instance group out of it:
+
+    gcloud beta compute instance-groups managed create mtb-lohja-forum \
+      --size=1 \
+      --template=mtb-lohja-forum-1 \
+      --region=europe-west1
+
+TODO: Add health checks to above
