@@ -7,8 +7,13 @@ any administrator as now running the forum is reproducible on any environment.
 
 Copy your data folder contents to data/ (see data/README.md for details).
 
-Build the image with `docker build -t mtb-lohja/forum .`. Then run the image 
-with `docker run -p 8080:80 -v $(pwd)/data:/data mtb-lohja/forum`
+    # Build docker image
+    make build
+
+    # Build & run
+    make run
+
+See Makefile for details.
 
 ## Migrate from traditionally hosted site
 
