@@ -26,8 +26,8 @@ as you wish (see below).
 
 ## Host on Google Cloud Platform
 
-Showing a way to host this docker image as Google Cloud's Managed Instance Group. Keeping data at Google Cloud Buckets; albeit slow, they are more than enough for
-this kind of seldom access use.
+Showing a way to host this docker image as Google Cloud's Managed Instance Group. Keeping data at Google Cloud 
+Buckets; albeit slow, they are more than enough for this kind of seldom access use.
 
 ### Copy data to Google Cloud Buckets
 
@@ -52,13 +52,22 @@ Copy all of the data folder contents to the mounted disk
 
 ### Define a managed instance group
 
+[Overview docs about running Docker containers on GCE VM images (but not Kubernetes)](
+https://cloud.google.com/compute/docs/containers/deploying-containers)
+
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
-    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-1 \
-      --container-image=gcr.io/mtb-lohja/forum:1.0 \
-      --container-mount-host-path=host-path=/mnt/data,mount-path=/data \
+    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-3 \
+      --container-image=gcr.io/mtb-lohja/forum:1.1 \
+      --container-mount-host-path=host-path=/var/data,mount-path=/data \
+      --container-mount-host-path=host-path=/var/data/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
       --machine-type=f1-micro \
-      --metadata=startup-script='sudo mkdir /mnt/data && sudo chmod a+w /mnt/data && gcsfuse --dir-mode "777" --file-mode "777" -o allow_other mtb-lohja-forum-data /mnt/data' \
+      --metadata=startup-script='#! /bin/bash
+sudo su -
+mkdir /var/data
+chmod a+w /var/data
+gcsfuse --dir-mode "777" --file-mode "777" -o allow_other mtb-lohja-forum-data /var/data
+' \
       --address=35.205.128.77 \
       --region=europe-west1 \
       --scopes=default,storage-full
@@ -69,7 +78,9 @@ After the instance template has been created, create an instance group out of it
 
     gcloud beta compute instance-groups managed create mtb-lohja-forum \
       --size=1 \
-      --template=mtb-lohja-forum-1 \
+      --template=mtb-lohja-forum-2 \
       --region=europe-west1
 
 TODO: Add health checks to above
+
+TODO: Create firewall rule https://cloud.google.com/vpc/docs/using-firewalls#creating_firewall_rules
