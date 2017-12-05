@@ -26,29 +26,24 @@ as you wish (see below).
 
 ## Host on Google Cloud Platform
 
-Showing a way to host this docker image as Google Cloud's Managed Instance Group. Keeping data at Google Cloud 
-Buckets; albeit slow, they are more than enough for this kind of seldom access use.
+Showing a way to host this docker image as Google Cloud's Managed Instance Group. Keeping data at Google Cloud
+persistend disk.
 
-### Copy data to Google Cloud Buckets
+### Copy data to GCE persistent disk
 
-In all the below examples using "mtb-lohja" as Google Cloud project name, and
-mtb-lohja-forum-data as bucket name. Change these as you wish.
+Create a persistent disk
+    gcloud --project=mtb-lohja compute disks create mtb-lohja-forum-data \
+        --size=1GB \
+        --type=pd-standard \
+        --zone=europe-west1-c
 
-Create a cloud bucket to host the data:
+Attach the disk to any VM (can also be the VM below). Format the disk
+[with these instructions](https://cloud.google.com/compute/docs/disks/add-persistent-disk#formatting).
 
-    gsutil mb -p mtb-lohja -c regional -l europe-west1 gs://mtb-lohja-forum-data/
+Copy data to the disk with SCP, easiest way is to use [gcloud scp command](https://cloud.google.com/sdk/gcloud/reference/compute/scp).
+E.g.:
 
-Prepare your own workstation with FUSE with [these instructions](https://cloud.google.com/storage/docs/gcs-fuse).
-
-Map the bucket to your local disk.
-
-    mkdir -p ~/mnt/mtb-lohja-forum-data
-    gcsfuse mtb-lohja-forum-data ~/mnt/mtb-lohja-forum-data
-
-Copy all of the data folder contents to the mounted disk
-
-    cd data/
-    cp -r * ~/mnt/mtb-lohja-forum-data
+    gcloud compute --project "mtb-lohja" scp --zone "europe-west1-c" data/* "mtb-lohja-forum-xw5l":/mnt/disks/data --recurse
 
 ### Define a managed instance group
 
@@ -57,18 +52,23 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
 
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
-    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-3 \
+    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-1 \
       --container-image=gcr.io/mtb-lohja/forum:1.1 \
-      --container-mount-host-path=host-path=/var/data,mount-path=/data \
-      --container-mount-host-path=host-path=/var/data/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
+      --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
+      --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
+      --disk=device-name=forum-data,mode=rw,name=mtb-lohja-forum-data \
       --machine-type=f1-micro \
-      --metadata=startup-script='#! /bin/bash
-sudo su -
-mkdir /var/data
-chmod a+w /var/data
-gcsfuse --dir-mode "777" --file-mode "777" -o allow_other mtb-lohja-forum-data /var/data
+      --metadata=^:^startup-script='#! /bin/bash
+if [ -d /mnt/disks/data ]; then
+    exit 0
+fi
+sudo mkdir /mnt/disks/data
+sudo mount -o discard,defaults /dev/sdb /mnt/disks/data
+sudo chmod a+w /mnt/disks/data
+echo UUID=$(sudo blkid -s UUID -o value /dev/sdb) /mnt/disks/data ext4 discard,defaults,nofail 0 2 | sudo tee -a /etc/fstab
 ' \
-      --address=35.205.128.77 \
+      --address=35.189.248.107 \
+      --tags=http-server \
       --region=europe-west1 \
       --scopes=default,storage-full
 
@@ -76,10 +76,10 @@ For Fuse mounting init script see [this example.](https://lemag.sfeir.com/wordpr
 
 After the instance template has been created, create an instance group out of it:
 
-    gcloud beta compute instance-groups managed create mtb-lohja-forum \
+    gcloud --project=mtb-lohja beta compute instance-groups managed create mtb-lohja-forum \
       --size=1 \
-      --template=mtb-lohja-forum-2 \
-      --region=europe-west1
+      --template=mtb-lohja-forum-1 \
+      --zone=europe-west1-c
 
 TODO: Add health checks to above
 
