@@ -90,3 +90,5 @@ Finally create an instance group out of instance template and health check:
       --template=mtb-lohja-forum-1 \
       --zone=europe-west1-c \
       --http-health-check=mtb-lohja-forum-http
+
+Note! For now go and enable HTTP traffic on the VM settings, needs to be automated later somehow.
