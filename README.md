@@ -74,13 +74,19 @@ echo UUID=$(sudo blkid -s UUID -o value /dev/sdb) /mnt/disks/data ext4 discard,d
 
 For Fuse mounting init script see [this example.](https://lemag.sfeir.com/wordpress-cluster-docker-google-cloud-platform/)
 
-After the instance template has been created, create an instance group out of it:
+After the instance template has been created, create health check (needed only once):
+
+    gcloud --project=mtb-lohja beta compute http-health-checks create mtb-lohja-forum-http \
+        --check-interval=30s \
+        --healthy-threshold=2 \
+        --request-path=/cgi-bin/yabb2/YaBB.pl \
+        --timeout=5s \
+        --unhealthy-threshold=2
+
+Finally create an instance group out of instance template and health check:
 
     gcloud --project=mtb-lohja beta compute instance-groups managed create mtb-lohja-forum \
       --size=1 \
       --template=mtb-lohja-forum-1 \
-      --zone=europe-west1-c
-
-TODO: Add health checks to above
-
-TODO: Create firewall rule https://cloud.google.com/vpc/docs/using-firewalls#creating_firewall_rules
+      --zone=europe-west1-c \
+      --http-health-check=mtb-lohja-forum-http
