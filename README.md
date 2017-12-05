@@ -52,10 +52,11 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
 
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
-    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-1 \
-      --container-image=gcr.io/mtb-lohja/forum:1.1 \
+    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-2 \
+      --container-image=gcr.io/mtb-lohja/forum:1.2 \
       --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
       --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
+      --container-env=DOMAIN=http://foorumi.mtb-lohja.com \
       --disk=device-name=forum-data,mode=rw,name=mtb-lohja-forum-data \
       --machine-type=f1-micro \
       --metadata=^:^startup-script='#! /bin/bash
@@ -87,7 +88,7 @@ Finally create an instance group out of instance template and health check:
 
     gcloud --project=mtb-lohja beta compute instance-groups managed create mtb-lohja-forum \
       --size=1 \
-      --template=mtb-lohja-forum-1 \
+      --template=mtb-lohja-forum-2 \
       --zone=europe-west1-c \
       --http-health-check=mtb-lohja-forum-http
 

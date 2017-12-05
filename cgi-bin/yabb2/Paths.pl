@@ -18,7 +18,7 @@ $lastdate = "1380521364";
 ########## Directories ##########
 
 # $boardurl = "http://www.mtb-lohja.com/cgi-bin/yabb2"; # URL of your board's folder (without trailing '/')
-$boardurl = "/cgi-bin/yabb2";    # URL of your board's folder (without trailing '/')
+$boardurl = $ENV{'DOMAIN'} . "/cgi-bin/yabb2";    # URL of your board's folder (without trailing '/')
 $boarddir = ".";                                  # The server path to the board's folder (usually can be left as '.')
 $boardsdir = "/data/Boards";                          # Directory with board data files
 $datadir = "/data/Messages";                          # Directory with messages
@@ -35,9 +35,9 @@ $uploaddir = "/yabbfiles/Attachments"; # Base Path for all attachment files
 
 ########## URL's ##########
 
-$yyhtml_root = "/yabbfiles"; # Base URL for all html/css files and folders
-$facesurl = "/yabbfiles/avatars"; # Base URL for all avatar files
-$uploadurl = "/yabbfiles/Attachments"; # Base URL for all attachment files
+$yyhtml_root = $ENV{'DOMAIN'} . "/yabbfiles"; # Base URL for all html/css files and folders
+$facesurl = $ENV{'DOMAIN'} . "/yabbfiles/avatars"; # Base URL for all avatar files
+$uploadurl = $ENV{'DOMAIN'} . "/yabbfiles/Attachments"; # Base URL for all attachment files
 
 ########## Old Path Settings ################################
 ########## The following variables are deprecated! ##########
