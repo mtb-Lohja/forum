@@ -56,6 +56,7 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
       --container-image=gcr.io/mtb-lohja/forum:1.2 \
       --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
       --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
+      --container-mount-host-path=host-path=/mnt/disks/UserAvatars,mount-path=/usr/local/apache2/htdocs/yabbfiles/avatars/UserAvatars \
       --container-env=DOMAIN=http://foorumi.mtb-lohja.com \
       --disk=device-name=forum-data,mode=rw,name=mtb-lohja-forum-data \
       --machine-type=f1-micro \
