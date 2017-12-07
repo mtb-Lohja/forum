@@ -52,8 +52,8 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
 
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
-    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-2 \
-      --container-image=gcr.io/mtb-lohja/forum:1.2 \
+    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-3 \
+      --container-image=gcr.io/mtb-lohja/forum:1.3 \
       --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
       --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
       --container-mount-host-path=host-path=/mnt/disks/UserAvatars,mount-path=/usr/local/apache2/htdocs/yabbfiles/avatars/UserAvatars \
@@ -89,8 +89,7 @@ Finally create an instance group out of instance template and health check:
 
     gcloud --project=mtb-lohja beta compute instance-groups managed create mtb-lohja-forum \
       --size=1 \
-      --template=mtb-lohja-forum-2 \
+      --template=mtb-lohja-forum-3 \
       --zone=europe-west1-c \
       --http-health-check=mtb-lohja-forum-http
 
-Note! For now go and enable HTTP traffic on the VM settings, needs to be automated later somehow.
