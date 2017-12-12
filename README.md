@@ -57,7 +57,7 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
       --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
       --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
       --container-mount-host-path=host-path=/mnt/disks/UserAvatars,mount-path=/usr/local/apache2/htdocs/yabbfiles/avatars/UserAvatars \
-      --container-env=DOMAIN=http://foorumi.mtb-lohja.com \
+      --container-env=DOMAIN=http://foorumi.mtb-lohja.com,SENDGRID_API_KEY=replace-me-with-real-key \
       --disk=device-name=forum-data,mode=rw,name=mtb-lohja-forum-data \
       --machine-type=f1-micro \
       --metadata=^:^startup-script='#! /bin/bash

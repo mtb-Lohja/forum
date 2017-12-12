@@ -26,7 +26,7 @@ $settings_file_version = "YaBB 2.5.2";            # If not equal actual YaBBvers
 
 $maintenance = 0;                                 # Set to 1 to enable Maintenance mode
 $rememberbackup = 0;                              # seconds past since last backup until alert is displayed
-$maintenancetext = "Muutto\ k\äynniss\ä";         # Admin-defined text for Maintenance mode
+$maintenancetext = "Muutto\ k\ï¿½ynniss\ï¿½";         # Admin-defined text for Maintenance mode
 
 $guestaccess = 1;                                 # Set to 0 to disallow guests from doing anything but login or
                                                   #  register
@@ -66,13 +66,13 @@ $lang = "English";                                # Default Forum Language
 $default_template = "Forum\ default";             # Default Forum Template
 
 $mailprog = "\/usr\/sbin\/sendmail";              # Location of your sendmail program
-$smtp_server = "127\.0\.0\.1";                    # Address of your SMTP-Server (for Net::SMTP::TLS, specify the port
+$smtp_server = "smtp.sendgrid.net:587";           # Address of your SMTP-Server (for Net::SMTP::TLS, specify the port
                                                   #  number with a ":<portnumber>" at the end)
-$smtp_auth_required = 0;                          # Set to 1 if the SMTP server requires Authorisation
-$authuser = "";                                   # Username for SMTP authorisation
-$authpass = "";                                   # Password for SMTP authorisation
+$smtp_auth_required = 1;                          # Set to 1 if the SMTP server requires Authorisation
+$authuser = "apikey";                             # Username for SMTP authorisation
+$authpass = "$ENV{'SENDGRID_API_KEY'}";           # Password for SMTP authorisation
 $webmaster_email = "tero\@teelahti\.fi";          # Your email address. (eg: $webmaster_email = q^admin@host.com^;)
-$mailtype = 0;                                    # Mail program to use: 0 = sendmail, 1 = SMTP, 2 = Net::SMTP, 3 =
+$mailtype = 2;                                    # Mail program to use: 0 = sendmail, 1 = SMTP, 2 = Net::SMTP, 3 =
                                                   #  Net::SMTP::TLS
 
 $UseHelp_Perms = 1;                               # Help Center: 1 == use permissions, 0 == don't use permissions
@@ -91,7 +91,7 @@ $Post{'0'} = 'Junior Member|2|stargold.gif||0|0|0|0|0|0|0';
 $Post{'250'} = 'Senior Member|4|stargold.gif||0|0|0|0|0|0';
 $Post{'500'} = 'God Member|5|starsilver.gif||0|0|0|0|0|0';
 $Post{'100'} = 'Full Member|3|starblue.gif||0|0|0|0|0|0';
-$Post{'-1'} = 'Märkäkorva|1|stargold.gif||0|0|0|0|0|0|0';
+$Post{'-1'} = 'Mï¿½rkï¿½korva|1|stargold.gif||0|0|0|0|0|0|0';
 
 @nopostorder = qw();                              # Order how "Post independent Member Groups" are displayed
 
@@ -200,7 +200,7 @@ $maxsteps = 40;                                   # Number of steps to take to c
 $stepdelay = 0;                                   # Time in miliseconds of a single step
 $fadelinks = 1;                                   # Fade links as well as text?
 
-$defaultusertxt = "MTB\-Lohja\ toy\ uusioj\äsen"; # The dafault usertext visible in users posts
+$defaultusertxt = "MTB\-Lohja\ toy\ uusioj\ï¿½sen"; # The dafault usertext visible in users posts
 $timeout = 20;                                    # Minimum time between 2 postings from the same IP
 $HotTopic = 10;                                   # Number of posts needed in a topic for it to be classed as "Hot"
 $VeryHotTopic = 25;                               # Number of posts needed in a topic for it to be classed as "Very Hot"
@@ -304,7 +304,7 @@ $spam_questions_case = 0;                         # Set to 1 to enable case-sens
 
 ########## RSS Settings ##########
 
-$rss_disabled = 0;                                # Set to 1 to disable the RSS feed
+$rss_disabled = 1;                                # Set to 1 to disable the RSS feed
 $rss_limit = 10;                                  # Maximum number of topics in the feed
 $rss_message = 1;                                 # Message to display in the feed
                                                   # 0: None
@@ -368,7 +368,7 @@ $enable_PMsearch = 5;                             #enable/max returns for PM sea
                                                   #  results
 
 $send_welcomeim = 1;                              # enable auto-welcome message from forum to new member. 1=yes, 0=no
-$sendname = "Yll\äpito";                          # username 'from' for welcome message. Defaults to fa.
+$sendname = "Yll\ï¿½pito";                          # username 'from' for welcome message. Defaults to fa.
 $imsubject = "Tervetuloa";                        # title of welcome message.
 $imtext = "Tervetuloa\ MTB\-Lohja\ keskustelufoorumille\!"; # message sent to new member
 

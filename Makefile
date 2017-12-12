@@ -13,4 +13,5 @@ run: build
 	  -v $(DIR)/data/Attachments:/usr/local/apache2/htdocs/yabbfiles/Attachments \
 	  -v $(DIR)/data/UserAvatars:/usr/local/apache2/htdocs/yabbfiles/avatars/UserAvatars \
 	  -e DOMAIN=http://localhost:8080 \
+	  -e SENDGRID_API_KEY=replace-me-with-real-key \
 	  mtb-lohja/forum
