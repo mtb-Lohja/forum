@@ -52,44 +52,10 @@ https://cloud.google.com/compute/docs/containers/deploying-containers)
 
 [Docs for the managed instance groups with Docker.](https://cloud.google.com/sdk/gcloud/reference/alpha/compute/instance-templates/create-with-container)
 
-    gcloud --project=mtb-lohja beta compute instance-templates create-with-container mtb-lohja-forum-3 \
-      --container-image=gcr.io/mtb-lohja/forum:1.3 \
-      --container-mount-host-path=host-path=/mnt/disks/data,mount-path=/data \
-      --container-mount-host-path=host-path=/mnt/disks/Attachments,mount-path=/usr/local/apache2/htdocs/yabbfiles/Attachments \
-      --container-mount-host-path=host-path=/mnt/disks/UserAvatars,mount-path=/usr/local/apache2/htdocs/yabbfiles/avatars/UserAvatars \
-      --container-env=DOMAIN=http://foorumi.mtb-lohja.com,SENDGRID_API_KEY=replace-me-with-real-key \
-      --disk=device-name=forum-data,mode=rw,name=mtb-lohja-forum-data \
-      --machine-type=f1-micro \
-      --metadata=^:^startup-script='#! /bin/bash
-if [ -d /mnt/disks/data ]; then
-    exit 0
-fi
-sudo mkdir /mnt/disks/data
-sudo mount -o discard,defaults /dev/sdb /mnt/disks/data
-sudo chmod a+w /mnt/disks/data
-echo UUID=$(sudo blkid -s UUID -o value /dev/sdb) /mnt/disks/data ext4 discard,defaults,nofail 0 2 | sudo tee -a /etc/fstab
-' \
-      --address=35.189.248.107 \
-      --tags=http-server \
-      --region=europe-west1 \
-      --scopes=default,storage-full
+Use /scripts/create-instance-template.sh to create an instance template. There is an option --deploy to
+immediately deploy the new group in further deployments.
 
-For Fuse mounting init script see [this example.](https://lemag.sfeir.com/wordpress-cluster-docker-google-cloud-platform/)
+Create health check (needed only once) with /scripts/create-health-check.sh
 
-After the instance template has been created, create health check (needed only once):
-
-    gcloud --project=mtb-lohja beta compute http-health-checks create mtb-lohja-forum-http \
-        --check-interval=30s \
-        --healthy-threshold=2 \
-        --request-path=/cgi-bin/yabb2/YaBB.pl \
-        --timeout=5s \
-        --unhealthy-threshold=2
-
-Finally create an instance group out of instance template and health check:
-
-    gcloud --project=mtb-lohja beta compute instance-groups managed create mtb-lohja-forum \
-      --size=1 \
-      --template=mtb-lohja-forum-3 \
-      --zone=europe-west1-c \
-      --http-health-check=mtb-lohja-forum-http
+Finally create an instance group out of instance template and health check with /scripts/create-instance-group.sh
 
