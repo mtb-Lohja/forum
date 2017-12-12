@@ -49,14 +49,18 @@ echo UUID=$(sudo blkid -s UUID -o value /dev/sdb) /mnt/disks/data ext4 discard,d
       --scopes=default,storage-full
 
 if [ "$deploy" == "--deploy" ]; then 
-    echo "Deploying template to the instance group $instance_group"
+    echo "Deploying template $template_name to the instance group $instance_group"
+    gcloud --project=$project beta compute instance-groups managed rolling-action start-update "$instance_group" \
+      --version template="$template_name" \
+      --zone europe-west1-c
 
-    gcloud --project=$project beta compute instance-groups managed set-instance-template "$instance_group" \
-      --zone=europe-west1-c \
-      --template="$template_name"
+    # An alternative:
+    # gcloud --project=$project beta compute instance-groups managed set-instance-template "$instance_group" \
+    #   --zone=europe-west1-c \
+    #   --template="$template_name"
 
-    echo "Restarting instance group to take new template into use"
-    gcloud --project=$project beta compute instance-groups managed rolling-action replace "$instance_group" \
-      --zone=europe-west1-c \
-      --max-surge=0
+    # echo "Restarting instance group to take new template into use"
+    # gcloud --project=$project beta compute instance-groups managed rolling-action replace "$instance_group" \
+    #   --zone=europe-west1-c \
+    #   --max-surge=0
 fi
