@@ -12,7 +12,7 @@ instance_group="mtb-lohja-forum"
 
 tag=$1
 
-if [ -z "$index" ]; then
+if [ -z "$tag" ]; then
     >&2 echo "Usage:"
     >&2 echo "    $0 image-tag"
     >&2 echo ""
@@ -23,6 +23,6 @@ fi
 
 gcloud --project=$project beta compute instance-groups managed create "$instance_group" \
       --size=1 \
-      --template=mtb-lohja-forum-$tag \
+      --template="mtb-lohja-forum-${tag//./-}" \
       --zone=europe-west1-c \
       --http-health-check=mtb-lohja-forum-http

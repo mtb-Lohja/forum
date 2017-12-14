@@ -14,7 +14,7 @@ tag=$1
 sendgid_api_key=$2
 deploy=$3
 
-if [ -z "$tag" ] || [ -z "$sendgrid_api_key" ]; then
+if [ -z "$tag" ] || [ -z "$sendgid_api_key" ]; then
     >&2 echo "Usage:"
     >&2 echo "    $0 image-tag sendgrid-api-key [--deploy]"
     >&2 echo ""
@@ -52,7 +52,8 @@ if [ "$deploy" == "--deploy" ]; then
     echo "Deploying template $template_name to the instance group $instance_group"
     gcloud --project=$project beta compute instance-groups managed rolling-action start-update "$instance_group" \
       --version template="$template_name" \
-      --zone europe-west1-c
+      --zone europe-west1-c \
+      --max-unavailable 100% 
 
     # An alternative:
     # gcloud --project=$project beta compute instance-groups managed set-instance-template "$instance_group" \
