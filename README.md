@@ -59,3 +59,6 @@ Create health check (needed only once) with /scripts/create-health-check.sh
 
 Finally create an instance group out of instance template and health check with /scripts/create-instance-group.sh
 
+### Backup data
+
+Backup cron job (disk snapshotting) is defined in a separate [Github repository](https://github.com/mtb-lohja/forum-backup).
