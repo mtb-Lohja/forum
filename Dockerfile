@@ -1,4 +1,4 @@
-FROM httpd:2.4.29-alpine
+FROM httpd:2.4.33-alpine
 
 # Install packages needed by YaBB
 RUN apk add --no-cache \
