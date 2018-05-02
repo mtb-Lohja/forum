@@ -26,7 +26,7 @@ $settings_file_version = "YaBB 2.5.2";            # If not equal actual YaBBvers
 
 $maintenance = 0;                                 # Set to 1 to enable Maintenance mode
 $rememberbackup = 0;                              # seconds past since last backup until alert is displayed
-$maintenancetext = "Muutto\ käynnissä";           # Admin-defined text for Maintenance mode
+$maintenancetext = "Muutto\ k\�ynniss\�";         # Admin-defined text for Maintenance mode
 
 $guestaccess = 1;                                 # Set to 0 to disallow guests from doing anything but login or
                                                   #  register
@@ -200,7 +200,7 @@ $maxsteps = 40;                                   # Number of steps to take to c
 $stepdelay = 0;                                   # Time in miliseconds of a single step
 $fadelinks = 1;                                   # Fade links as well as text?
 
-$defaultusertxt = "MTB\-Lohja\ toy\ uusiojäsen"; # The dafault usertext visible in users posts
+$defaultusertxt = "MTB\-Lohja\ toy\ uusioj\�sen"; # The dafault usertext visible in users posts
 $timeout = 20;                                    # Minimum time between 2 postings from the same IP
 $HotTopic = 10;                                   # Number of posts needed in a topic for it to be classed as "Hot"
 $VeryHotTopic = 25;                               # Number of posts needed in a topic for it to be classed as "Very Hot"
@@ -368,7 +368,7 @@ $enable_PMsearch = 5;                             #enable/max returns for PM sea
                                                   #  results
 
 $send_welcomeim = 1;                              # enable auto-welcome message from forum to new member. 1=yes, 0=no
-$sendname = "Ylläpito";                          # username 'from' for welcome message. Defaults to fa.
+$sendname = "Yll\�pito";                          # username 'from' for welcome message. Defaults to fa.
 $imsubject = "Tervetuloa";                        # title of welcome message.
 $imtext = "Tervetuloa\ MTB\-Lohja\ keskustelufoorumille\!"; # message sent to new member
 
