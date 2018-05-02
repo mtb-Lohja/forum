@@ -9,6 +9,11 @@ RUN apk add --no-cache \
 
 COPY ./httpd.conf /usr/local/apache2/conf/httpd.conf
 COPY ./public-html/ /usr/local/apache2/htdocs/
-COPY ./cgi-bin/ /usr/local/apache2/cgi-bin/
+
+# Trick to change permissions, first copy to tmp folder and then do on one go
+# See https://serverfault.com/questions/772227/chmod-not-working-correctly-in-docker
+COPY ./cgi-bin/yabb2 /yabb2
+RUN mv /yabb2 /usr/local/apache2/cgi-bin && \
+    chmod -R 777 /usr/local/apache2/cgi-bin/yabb2/Variables
 
 EXPOSE 80
