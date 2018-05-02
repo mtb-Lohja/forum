@@ -53,6 +53,7 @@ if [ "$deploy" == "--deploy" ]; then
     gcloud --project=$project beta compute instance-groups managed rolling-action start-update "$instance_group" \
       --version template="$template_name" \
       --zone europe-west1-c \
+      --max-surge 0 \
       --max-unavailable 100% 
 
     # An alternative:
