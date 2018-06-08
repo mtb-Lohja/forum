@@ -39,7 +39,7 @@ BEGIN {
       $script_root = $ENV{'SCRIPT_FILENAME'};
       $script_root =~ s/\/$yyexec\.(pl|cgi)//ig;
 
-      require "Paths.pl";
+      require "./Paths.pl";
       require "$vardir/Settings.pl";
 
       # Check for Time::HiRes if debugmodus is on

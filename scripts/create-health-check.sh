@@ -11,4 +11,4 @@ gcloud --project=mtb-lohja beta compute http-health-checks create mtb-lohja-foru
         --healthy-threshold=2 \
         --request-path=/cgi-bin/yabb2/YaBB.pl \
         --timeout=5s \
-        --unhealthy-threshold=2
+        --unhealthy-threshold=3
