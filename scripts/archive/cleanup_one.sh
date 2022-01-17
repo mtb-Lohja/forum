@@ -21,6 +21,7 @@ LC_ALL=C sed -f "$folder/cleanup.sed" "$file" \
     'span.useroffline',\
     'a[onclick^="ListPages"]' \
 | hxnormalize -l 100 \
+| iconv -f ISO-8859-1 -t UTF-8 \
 > "$tmpfile"
 
 mv "$tmpfile" "$file"	

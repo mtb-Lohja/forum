@@ -1,15 +1,15 @@
-# Blokkeja ylhäältä pois
+# Change encoding
+s/ISO-8859-1/UTF-8/
+# Change logo href
+s,http://www.mtb-lohja.com/,/,
+# Remove all shjs scripts 
 /shjs/d
-# Blokkeja pohjalta pois:
+# Remove blocks
 /Info Center block start/,/Info Center block end/d
 /Threads Admin Button Bar start/,/Threads Admin Button Bar end/d
 /Poll start/,/Poll end/d
 /Icon and access info start/,/Icon and access info end/d
 /javascript:sendtopicmail(/d
-## Multidel form start & end
-# Breaks structure
-# /action=multidel/d
-# /formsession/d
 /gb_styles/d
 /resize image start/,/resize image end/d
 # These lines have invalid HTML, need to remove or replace
