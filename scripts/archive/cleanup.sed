@@ -1,3 +1,8 @@
+# Change all links to use the last part as file name
+s,href="YaBB\.pl\.html",href="index.html",g
+s,href="YaBB\.pl%3Fnum=,href=",g
+s,href="YaBB\.pl%3Fcatselect=,href=",g
+s,href="YaBB\.pl%3Fboard=,href=",g
 # Change encoding
 s/ISO-8859-1/UTF-8/
 # Change logo href
