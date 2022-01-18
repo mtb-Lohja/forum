@@ -28,7 +28,6 @@ s|</form>||g
 /Icon and access info start/,/Icon and access info end/d
 /javascript:sendtopicmail(/d
 /gb_styles/d
-/resize image start/,/resize image end/d
 # These lines have invalid HTML, need to remove or replace
 \|<div class=</div>|d
 s|<br /></div></b>|<br /></b></div>|g
