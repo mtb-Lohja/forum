@@ -4,6 +4,9 @@ s_href="YaBB.pl.html"_href="index.html"_g
 # Paged links have double encoded page, like '/90' = '%252F90', should change to '-90'
 s|href="YaBB.pl%3F.\{1,10\}=\([^%]*\)%252F\([0-9]*\)\.html|href="\1-\2.html|g
 s|href="YaBB.pl%3F.\{1,10\}=|href="|g
+# Links in messages don't work anymore since the domain has changed during the years. Try to fix some of those too
+s|href="http://www.mtb-lohja.com/cgi-bin/yabb2/YaBB.pl?num=\([^"]*\)"|href="\1.html"|g
+s|href="http://foorumi.mtb-lohja.com/cgi-bin/yabb2/YaBB.pl?num=\([^"]*\)"|href="\1.html"|g
 # Change encoding
 s/ISO-8859-1/UTF-8/
 # Change logo href
