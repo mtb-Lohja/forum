@@ -17,6 +17,7 @@ do
   else
     parts=(${(s/=/)file})
     cleaned=$parts[2]
+    cleaned=${cleaned/\%2F/-}
     echo "Renaming $file -> $cleaned"
     mv "$file" "$cleaned"
   fi

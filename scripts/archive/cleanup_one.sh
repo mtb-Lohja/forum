@@ -15,6 +15,9 @@ LC_ALL=C sed -f "$folder/cleanup.sed" "$file" \
     'div#container > table:nth-child(3)',\
     'div#container > table:nth-child(4)',\
     'form[name=jump]',\
+    'input',\
+    'select',\
+    'noscript',\
     'div.displaycontainer > table > tr > td > a',\
     'div.dividertop',\
     'div#ImageAlert',\
