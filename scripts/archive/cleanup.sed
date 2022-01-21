@@ -1,3 +1,6 @@
+# Change doctype to get rid some of legacy stuff
+s| PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"||g
+s|xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"||g
 # Change all links to use the last part as file name
 s_href="YaBB.pl.html"_href="index.html"_g
 # num, board, catselect and others match this one
@@ -15,6 +18,8 @@ s|http://www.mtb-lohja.com/|/|
 s|<a href="http://foorumi.mtb-lohja.com/cgi-bin/yabb2/YaBB.pl?action=viewprofile;username=\([^"]*\)" rel="nofollow">\([^<]*\)</a>|\2|g
 # Remove all shjs scripts 
 /shjs/d
+# Remove dynamic info
+/Members viewing this topic/d
 # Remove forms
 s|<form action="\([^"]*\)" method="post" name="\([^"]*\)" style="\([^"]*\)">||g
 s|<form method="post" action="\([^"]*\)" name="\([^"]*\)" style="\([^"]*\)">||g
@@ -31,5 +36,6 @@ s|</form>||g
 # These lines have invalid HTML, need to remove or replace
 \|<div class=</div>|d
 s|<br /></div></b>|<br /></b></div>|g
+/SpamInator/d
 # Remove html comments
 /<!--/d
