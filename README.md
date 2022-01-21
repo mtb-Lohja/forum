@@ -1,5 +1,9 @@
 # MTB-Lohja forum
 
+**Note:** This solution is not in use anymore; it was retired 1/2022 and now the old forum is included
+as a static site within [mtb-lohja.com](https://mtb-lohja.com). The restricted, members-only forum also
+exists as a zip archive and can be requested from Tero for viewing.
+
 This is the legacy forum that has run for over ten years at mtb-lohja.com converted to a Docker format. This benefits
 any administrator as now running the forum is reproducible on any environment.
 
